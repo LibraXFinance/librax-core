@@ -4,6 +4,9 @@
   "homepage": "",
   "license": "MIT",
   "scripts": {
+    "lint": "yarn prettier ./test/*.ts --check",
+    "lint:fix": "yarn prettier ./test/*.ts --write",
+    "_test": "mocha",
     "clean": "hardhat clean",
     "build": "hardhat compile",
     "watch:test": "hardhat watch test",
