@@ -233,7 +233,9 @@ const config: HardhatUserConfig = {
       tags: ['staging'],
     },
     astar: {
-      url: 'https://rpc.astar.network:8545',
+      // url: 'https://rpc.astar.network:8545',
+      // url: 'https://astar.blastapi.io/85ffc636-3e78-4cd9-8e81-81ad0c211ba1', // ags finance
+      url: 'https://evm.astar.network', // arthswap
       accounts,
       chainId: 592,
       gasPrice: 'auto',
