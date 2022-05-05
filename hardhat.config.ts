@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import 'dotenv/config'
-import '@nomiclabs/hardhat-etherscan'
+// import '@nomiclabs/hardhat-etherscan'
+import '@librax/hardhat-etherscan'
 import '@nomiclabs/hardhat-solhint'
 import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-waffle'
@@ -45,11 +46,11 @@ const config: HardhatUserConfig = {
     sources: process.env.CONTRACTS_PATH || 'contracts',
     tests: 'test',
   },
-  etherscan: {
-    // apiKey: polygonScanToken, // polygonscan
-    // apiKey: ftmScanToken, // ftmscan
-    apiKey: ETHERSCAN_TOKEN, // ETHERSCAN_TOKEN
-  },
+  // etherscan: {
+  //   // apiKey: polygonScanToken, // polygonscan
+  //   // apiKey: ftmScanToken, // ftmscan
+  //   apiKey: ETHERSCAN_TOKEN, // ETHERSCAN_TOKEN
+  // },
   gasReporter: {
     coinmarketcap: process.env.COINMARKETCAP_API_KEY,
     currency: 'USD',
@@ -513,7 +514,7 @@ const config: HardhatUserConfig = {
         settings: {
           optimizer: {
             enabled: true,
-            runs: 99999,
+            runs: 9999,
           },
         },
       },
@@ -522,7 +523,7 @@ const config: HardhatUserConfig = {
         settings: {
           optimizer: {
             enabled: true,
-            runs: 99999,
+            runs: 9999,
           },
         },
       },

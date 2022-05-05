@@ -45,22 +45,31 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   const UniswapV2RouterAddress = LibraDeployConfig.UniswapV2Router
   const UniswapV2FactoryAddress = LibraDeployConfig.UniswapV2Factory
-  const WastarAddress = LibraDeployConfig.WETH
+  // const WastarAddress = LibraDeployConfig.WASTR
+  // const DaiAddress = LibraDeployConfig.DAI
+  // const UsdcAddress = LibraDeployConfig.USDC
+
+  // const WastarAddress = LibraDeployConfig.WASTR
+  const WFTMAddress = LibraDeployConfig.WFTM
   const DaiAddress = LibraDeployConfig.DAI
   const UsdcAddress = LibraDeployConfig.USDC
+  let WrawppedTokenAddress = LibraDeployConfig.WFTM
+  if (hre.network.name == 'astar') {
+    WrawppedTokenAddress = LibraDeployConfig.WASTR
+  }
 
   const UniswapV2Router = await ethers.getContractAt(UniswapV2RouterAbi, UniswapV2RouterAddress)
   const UniswapV2Factory = await ethers.getContractAt(UniswapV2FactoryAbi, UniswapV2FactoryAddress)
   console.log('UniswapV2RouterAddress: ' + UniswapV2RouterAddress)
   console.log('UniswapV2FactoryAddress: ' + UniswapV2FactoryAddress)
 
-  const WASTR = await ethers.getContractAt(ERC20Abi, WastarAddress)
+  const WrawppedToken = await ethers.getContractAt(ERC20Abi, WrawppedTokenAddress)
   const DAI = await ethers.getContractAt(ERC20Abi, DaiAddress)
 
   let thePair1 = ''
   let thePair2 = ''
-  thePair1 = await UniswapV2Factory.getPair(DaiAddress, WastarAddress)
-  thePair2 = await UniswapV2Factory.getPair(UsdcAddress, WastarAddress)
+  thePair1 = await UniswapV2Factory.getPair(DaiAddress, WrawppedTokenAddress)
+  thePair2 = await UniswapV2Factory.getPair(UsdcAddress, WrawppedTokenAddress)
   const thePair1LP = await ethers.getContractAt(ERC20Abi, thePair1)
   const thePair2LP = await ethers.getContractAt(ERC20Abi, thePair2)
 
@@ -71,7 +80,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     await (
       await UniswapV2Router.removeLiquidity(
         DaiAddress,
-        WastarAddress,
+        WrawppedTokenAddress,
         bal.div(3).toString(),
         0,
         0,
@@ -86,7 +95,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     await (
       await UniswapV2Router.addLiquidity(
         DaiAddress,
-        WastarAddress,
+        WrawppedTokenAddress,
         '100000000000000000',
         '100000000000000000',
         0,

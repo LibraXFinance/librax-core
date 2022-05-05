@@ -1,4 +1,5 @@
 // npx hardhat deploy --network astar --tags Deploy
+// npx hardhat deploy --network fantom --tags Deploy
 
 import { ethers } from 'hardhat'
 import { HardhatRuntimeEnvironment } from 'hardhat/types'
@@ -40,9 +41,15 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   const deployer = signers[0].address
   const gasLimit = 5000000
-  const WastarAddress = LibraDeployConfig.WETH
+  const WastarAddress = LibraDeployConfig.WASTR
+  const WFTMAddress = LibraDeployConfig.WFTM
   const DaiAddress = LibraDeployConfig.DAI
   const UsdcAddress = LibraDeployConfig.USDC
+  let WrawppedToken = LibraDeployConfig.WFTM
+  if (hre.network.name == 'astar') {
+    WrawppedToken = LibraDeployConfig.WASTR
+  }
+  console.log('WrawppedToken: ' + WrawppedToken)
 
   console.log('deployer = ' + deployer)
 
@@ -68,28 +75,28 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     hre,
     'UniswapV2Router02',
     deployer,
-    [UniswapV2Factory.address],
+    [UniswapV2Factory.address, WrawppedToken],
     true,
     gasLimit
   )
-  console.log('#UniswapV2Router02')
-  console.log(
-    'npx hardhat verify --network ' +
-      hre.network.name +
-      ' ' +
-      UniswapV2Router02.address +
-      ' ' +
-      UniswapV2Factory.address +
-      ' ' +
-      WastarAddress +
-      ' ' +
-      ' ' +
-      ' --contract ' +
-      'contracts/UniswapV2Router02.sol' +
-      ':' +
-      'UniswapV2Router02' +
-      ' '
-  )
+  // console.log('#UniswapV2Router02')
+  // console.log(
+  //   'npx hardhat verify --network ' +
+  //     hre.network.name +
+  //     ' ' +
+  //     UniswapV2Router02.address +
+  //     ' ' +
+  //     UniswapV2Factory.address +
+  //     ' ' +
+  //     WrawppedToken +
+  //     ' ' +
+  //     ' ' +
+  //     ' --contract ' +
+  //     'contracts/UniswapV2Router02.sol' +
+  //     ':' +
+  //     'UniswapV2Router02' +
+  //     ' '
+  // )
 }
 
 func.tags = ['Deploy']
