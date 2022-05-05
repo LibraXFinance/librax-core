@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import 'dotenv/config'
-import '@nomiclabs/hardhat-etherscan'
+// import '@nomiclabs/hardhat-etherscan'
+import '@librax/hardhat-etherscan'
 import '@nomiclabs/hardhat-solhint'
 import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-waffle'
@@ -48,7 +49,11 @@ const config: HardhatUserConfig = {
   etherscan: {
     // apiKey: polygonScanToken, // polygonscan
     // apiKey: ftmScanToken, // ftmscan
-    apiKey: ETHERSCAN_TOKEN, // ETHERSCAN_TOKEN
+    // apiKey: ETHERSCAN_TOKEN, // ETHERSCAN_TOKEN
+    apiKey: {
+      astar: 'your API key',
+      opera: ftmScanToken,
+    },
   },
   gasReporter: {
     coinmarketcap: process.env.COINMARKETCAP_API_KEY,
@@ -233,7 +238,9 @@ const config: HardhatUserConfig = {
       tags: ['staging'],
     },
     astar: {
-      url: 'https://rpc.astar.network:8545',
+      // url: 'https://rpc.astar.network:8545',
+      // url: 'https://astar.blastapi.io/85ffc636-3e78-4cd9-8e81-81ad0c211ba1', // ags finance
+      url: 'https://evm.astar.network', // arthswap
       accounts,
       chainId: 592,
       gasPrice: 'auto',
@@ -511,7 +518,7 @@ const config: HardhatUserConfig = {
         settings: {
           optimizer: {
             enabled: true,
-            runs: 99999,
+            runs: 9999,
           },
         },
       },
@@ -520,7 +527,7 @@ const config: HardhatUserConfig = {
         settings: {
           optimizer: {
             enabled: true,
-            runs: 99999,
+            runs: 9999,
           },
         },
       },
