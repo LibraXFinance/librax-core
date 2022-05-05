@@ -91,7 +91,13 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     ).wait()
     console.log('UniswapV2Router.removeLiquidity....ok ')
   } else {
+    console.log('WrawppedToken.approve....')
+    await (await WrawppedToken.approve(UniswapV2RouterAddress, '100000000000000000')).wait()
+    console.log('DAI.approve....')
+    await (await DAI.approve(UniswapV2RouterAddress, '100000000000000000')).wait()
+
     console.log('UniswapV2Router.addLiquidity....')
+
     await (
       await UniswapV2Router.addLiquidity(
         DaiAddress,
