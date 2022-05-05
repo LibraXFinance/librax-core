@@ -79,24 +79,24 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     true,
     gasLimit
   )
-  // console.log('#UniswapV2Router02')
-  // console.log(
-  //   'npx hardhat verify --network ' +
-  //     hre.network.name +
-  //     ' ' +
-  //     UniswapV2Router02.address +
-  //     ' ' +
-  //     UniswapV2Factory.address +
-  //     ' ' +
-  //     WrawppedToken +
-  //     ' ' +
-  //     ' ' +
-  //     ' --contract ' +
-  //     'contracts/UniswapV2Router02.sol' +
-  //     ':' +
-  //     'UniswapV2Router02' +
-  //     ' '
-  // )
+  console.log('#UniswapV2Router02')
+  console.log(
+    'npx hardhat verify --network ' +
+      hre.network.name +
+      ' ' +
+      UniswapV2Router02.address +
+      ' ' +
+      UniswapV2Factory.address +
+      ' ' +
+      WrawppedToken +
+      ' ' +
+      ' ' +
+      ' --contract ' +
+      'contracts/UniswapV2Router02.sol' +
+      ':' +
+      'UniswapV2Router02' +
+      ' '
+  )
 }
 
 func.tags = ['Deploy']
