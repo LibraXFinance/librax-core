@@ -43,8 +43,8 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const gasLimit = 5000000
   const WastarAddress = LibraDeployConfig.WASTR
   const WFTMAddress = LibraDeployConfig.WFTM
-  const DaiAddress = LibraDeployConfig.DAI
-  const UsdcAddress = LibraDeployConfig.USDC
+  // const DaiAddress = LibraDeployConfig.DAI
+  // const UsdcAddress = LibraDeployConfig.USDC
   let WrawppedToken = LibraDeployConfig.WFTM
   if (hre.network.name == 'astar') {
     WrawppedToken = LibraDeployConfig.WASTR
