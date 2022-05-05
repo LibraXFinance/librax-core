@@ -46,11 +46,15 @@ const config: HardhatUserConfig = {
     sources: process.env.CONTRACTS_PATH || 'contracts',
     tests: 'test',
   },
-  // etherscan: {
-  //   // apiKey: polygonScanToken, // polygonscan
-  //   // apiKey: ftmScanToken, // ftmscan
-  //   apiKey: ETHERSCAN_TOKEN, // ETHERSCAN_TOKEN
-  // },
+  etherscan: {
+    // apiKey: polygonScanToken, // polygonscan
+    // apiKey: ftmScanToken, // ftmscan
+    // apiKey: ETHERSCAN_TOKEN, // ETHERSCAN_TOKEN
+    apiKey: {
+      astar: 'your API key',
+      opera: ftmScanToken,
+    },
+  },
   gasReporter: {
     coinmarketcap: process.env.COINMARKETCAP_API_KEY,
     currency: 'USD',
