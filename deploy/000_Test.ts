@@ -1,4 +1,4 @@
-// npx hardhat deploy --network astar --tags Test
+// npx hardhat deploy --network avalanche --tags Test
 
 import { ethers } from 'hardhat'
 import { HardhatRuntimeEnvironment } from 'hardhat/types'
@@ -54,8 +54,8 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const DaiAddress = LibraDeployConfig.DAI
   const UsdcAddress = LibraDeployConfig.USDC
   let WrawppedTokenAddress = LibraDeployConfig.WFTM
-  if (hre.network.name == 'astar') {
-    WrawppedTokenAddress = LibraDeployConfig.WASTR
+  if (hre.network.name == 'avalanche') {
+    WrawppedTokenAddress = LibraDeployConfig.WAVAX
   }
 
   const UniswapV2Router = await ethers.getContractAt(UniswapV2RouterAbi, UniswapV2RouterAddress)
@@ -120,6 +120,7 @@ func.tags = ['Test']
 func.skip = async (hre) => {
   return (
     hre.network.name !== 'hardhat' &&
+    hre.network.name !== 'avalanche' &&
     hre.network.name !== 'astar' &&
     hre.network.name !== 'shiden' &&
     hre.network.name !== 'fantomtest' &&

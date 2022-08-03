@@ -52,6 +52,7 @@ const config: HardhatUserConfig = {
     // apiKey: ETHERSCAN_TOKEN, // ETHERSCAN_TOKEN
     apiKey: {
       astar: 'your API key',
+      avalanche: 'your API key',
       opera: ftmScanToken,
     },
   },
@@ -236,6 +237,15 @@ const config: HardhatUserConfig = {
       live: true,
       saveDeployments: true,
       tags: ['staging'],
+    },
+    avalanche: {
+      url: 'https://api.avax.network/ext/bc/C/rpc', 
+      accounts,
+      chainId: 43114,
+      gasPrice: 'auto',
+      live: true,
+      gasMultiplier: 2,
+      saveDeployments: true,
     },
     astar: {
       // url: 'https://rpc.astar.network:8545',

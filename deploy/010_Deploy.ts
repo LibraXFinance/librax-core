@@ -1,5 +1,6 @@
 // npx hardhat deploy --network astar --tags Deploy
 // npx hardhat deploy --network fantom --tags Deploy
+// npx hardhat deploy --network avalanche --tags Deploy
 
 import { ethers } from 'hardhat'
 import { HardhatRuntimeEnvironment } from 'hardhat/types'
@@ -11,8 +12,8 @@ import UniswapV2RouterAbi from './abi/UniswapV2Router.json'
 import ERC20Abi from './abi/erc20.json'
 
 import fs from 'fs'
-// import { Libra } from '../../addresses/astar/Libra'
-// import { LShare } from '../../addresses/astar/LShare'
+// import { Libra } from '../../addresses/avalanche/Libra'
+// import { LShare } from '../../addresses/avalanche/LShare'
 
 export async function mydeploy(
   hre: HardhatRuntimeEnvironment,
@@ -43,11 +44,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const gasLimit = 5000000
   const WastarAddress = LibraDeployConfig.WASTR
   const WFTMAddress = LibraDeployConfig.WFTM
+  const WAVAXAddress = LibraDeployConfig.WAVAX
   // const DaiAddress = LibraDeployConfig.DAI
   // const UsdcAddress = LibraDeployConfig.USDC
   let WrawppedToken = LibraDeployConfig.WFTM
-  if (hre.network.name == 'astar') {
-    WrawppedToken = LibraDeployConfig.WASTR
+  if (hre.network.name == 'avalanche') {
+    WrawppedToken = LibraDeployConfig.WAVAX
   }
   console.log('WrawppedToken: ' + WrawppedToken)
 
@@ -104,6 +106,7 @@ func.tags = ['Deploy']
 func.skip = async (hre) => {
   return (
     hre.network.name !== 'hardhat' &&
+    hre.network.name !== 'avalanche' &&
     hre.network.name !== 'astar' &&
     hre.network.name !== 'shiden' &&
     hre.network.name !== 'fantomtest' &&
